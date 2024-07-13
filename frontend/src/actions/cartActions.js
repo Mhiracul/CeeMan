@@ -11,6 +11,9 @@ export const DECREASE_QUANTITY_SUCCESS = "DECREASE_QUANTITY_SUCCESS";
 export const DECREASE_QUANTITY_FAIL = "DECREASE_QUANTITY_FAIL";
 export const DELETE_CART_ITEM_SUCCESS = "DELETE_CART_ITEM_SUCCESS";
 export const DELETE_CART_ITEM_FAIL = "DELETE_CART_ITEM_FAIL";
+export const FETCH_TOTAL_CART_ITEMS_SUCCESS = "FETCH_TOTAL_CART_ITEMS_SUCCESS";
+export const FETCH_TOTAL_CART_ITEMS_FAIL = "FETCH_TOTAL_CART_ITEMS_FAIL";
+
 // Add a product to cart
 // Add a product to cart
 // Add a product to cart
@@ -197,6 +200,43 @@ export const deleteCartItem = (cartItemId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_CART_ITEM_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const fetchTotalCartItems = () => async (dispatch) => {
+  const token = localStorage.getItem("auth");
+
+  if (!token) {
+    dispatch({
+      type: FETCH_TOTAL_CART_ITEMS_FAIL,
+      payload: "No authentication token found.",
+    });
+    return;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await axios.get(
+      "https://ceeman-back.onrender.com/api/cart/items/total_No",
+      config
+    );
+
+    dispatch({
+      type: FETCH_TOTAL_CART_ITEMS_SUCCESS,
+      payload: response.data.total,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_TOTAL_CART_ITEMS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

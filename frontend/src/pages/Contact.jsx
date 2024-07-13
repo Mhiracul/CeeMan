@@ -148,7 +148,7 @@ function Contact() {
                 ></textarea>
                 <button
                   type="submit"
-                  className="w-full h-[3rem] md:h-[4rem] bg-[#000] text-[#fff] font-bold"
+                  className="w-full py-1 bg-[#fff] text-[#000] shadow-md font-bold"
                 >
                   Send
                 </button>

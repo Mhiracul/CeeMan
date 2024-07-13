@@ -19,14 +19,14 @@ function About() {
           <Nav />
           <div className="py-20">
             <div className="flex md:flex-row flex-col justify-between">
-              <div className="container md:text-left text-center mx-auto px-10">
-                <h1 className="md:text-4xl text-xl  capitalize font-bold text-[#2544D8]">
+              <div className="container md:text-left text-center mx-auto  px-10">
+                <h1 className="md:text-3xl text-xl mb-5  capitalize font-bold text-[#2544D8]">
                   About us
                 </h1>
-                <h3 className="md:text-4xl text-xl   font-bold">
+                <h3 className="md:text-3xl text-xl max-w-md   font-bold">
                   Welcome to Ceeman Power Generator Company
                 </h3>
-                <p className="md:text-base text-sm py-3">
+                <p className="md:text-sm max-w-md text-xs py-3">
                   At Ceeman Power Generator Company, we are dedicated to
                   providing reliable, efficient, and innovative power solutions
                   to meet the diverse needs of our customers nationwide. With a
@@ -36,7 +36,7 @@ function About() {
                   and industrial applications.
                 </p>
                 <Link to={"/product"}>
-                  <button className="mt-10 bg-[#2544D8] w-full text-white py-2 shadow-custom">
+                  <button className="mt-10 bg-[#2544D8] md:w-1/4 w-full text-white py-2 shadow-custom">
                     See Products
                   </button>
                 </Link>

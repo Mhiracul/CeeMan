@@ -12,6 +12,7 @@ import img from "../assets/images/CEEMAN IMG (3) 1.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import blueTick from "../assets/images/Blue tick.png";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SignIn = () => {
   const initialFormData = {
@@ -96,6 +97,13 @@ const SignIn = () => {
           heading={`Welcome Back!`}
           sizeClass={`w-1/2    capitalize mx-auto  absolute bottom-0`}
         />
+        <div className="">
+          {" "}
+          <Link to={"/"}>
+            <IoMdArrowRoundBack size={30} />
+          </Link>
+        </div>
+
         <div className="w-full flex items-center justify-center h-full bg-white">
           <div className="bg-white px-10 py-8 rounded-lg w-full ">
             <h2 className="text-3xl font-bold mb-6">Sign In</h2>

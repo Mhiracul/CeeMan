@@ -11,7 +11,7 @@ const CustomerAgent = () => {
             <h2 className="md:text-3xl text-xl md:text-left text-center font-semibold text-white capitalize">
               Connect With Our Customer Service Agent
             </h2>
-            <p className="text-base md:text-left text-center font-normal">
+            <p className="text-base text-white md:text-left text-center font-normal">
               Let’s guide you through making the right Ceeman Generator choice
               for your every need!
             </p>

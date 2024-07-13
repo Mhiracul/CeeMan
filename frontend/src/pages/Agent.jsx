@@ -6,42 +6,54 @@ import imgo from "../assets/images/Agent.svg";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import blueTick from "../assets/images/Blue tick.png";
+import { toast } from "react-hot-toast";
 
 function Agent() {
   const initialFormData = {
-    name: "",
+    fullName: "",
     email: "",
-    address: "",
-    state: "",
-    phone: "",
+    officeAddress: "",
+    State: "",
+    phoneNumber: "",
+    WhyYouWantToBeACeeManAgent: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
   const [showPopup, setShowPopup] = useState(false);
-  // const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
-    setShowPopup(true);
+    try {
+      // Simulate API call or actual fetch
+      // const response = await fetch("http://localhost:3000/api/becomeAgent", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(formData),
+      // });
+      // const data = await response.json();
+      // console.log(data);
 
-    // Clear form
-    resetForm();
+      // Assuming success for demonstration
+      setShowPopup(true);
+      toast.success("Application submitted successfully!");
+      resetForm();
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      toast.error("Failed to submit application. Please try again.");
+    }
   };
 
   const resetForm = () => {
     setFormData(initialFormData);
   };
-
-  // const togglePasswordVisibility = () => {
-  //   setShowPassword(!showPassword);
-  // };
 
   return (
     <>
@@ -63,98 +75,85 @@ function Agent() {
                 </div>
                 <div className="sm:mx-auto sm:w-full sm:max-w-md"></div>
                 <h1 className="font-medium text-[#000] text-3xl mb-4">
-                  {"Agent Apllication"}
+                  {"Agent Application"}
                 </h1>
                 <div className="bg-white">
                   <form onSubmit={handleFormSubmit}>
                     <div>
-                      {/* <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Full Name
-                      </label> */}
                       <div className="mt-1">
                         <input
-                          id="name"
+                          id="fullName"
                           type="text"
-                          name="name"
-                          value={formData.name}
+                          name="fullName"
+                          value={formData.fullName}
                           placeholder="Full Name"
                           onChange={handleChange}
-                          // autoComplete="name"
                           required
                           className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-cyan-400 focus:z-10 sm:text-sm"
                         />
                       </div>
                     </div>
                     <div>
-                      {/* <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Email
-                      </label> */}
                       <div className="mt-5">
                         <input
-                          // id="email"
+                          id="email"
                           type="email"
                           name="email"
                           value={formData.email}
                           placeholder="Email Address"
                           onChange={handleChange}
-                          // autoComplete="email"
                           required
                           className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-cyan-400 focus:z-10 sm:text-sm"
                         />
                       </div>
                     </div>
-
                     <div className="">
-                      {/* <label
-                        htmlFor="address"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Address
-                      </label> */}
                       <div className="mt-5">
                         <input
-                          id="address"
+                          id="officeAddress"
                           type="text"
-                          name="address"
-                          value={formData.address}
+                          name="officeAddress"
+                          value={formData.officeAddress}
                           placeholder="Office Address"
                           onChange={handleChange}
-                          autoComplete="current-address"
                           required
-                          className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-cyan-400 focus:z-10 sm:text-sm"
+                          className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-cyan-400 focus:z-10 sm:text-sm"
                         />
                       </div>
                       <div className="mt-5">
                         <input
-                          id="state"
+                          id="State"
                           type="text"
-                          name="state"
-                          value={formData.state}
+                          name="State"
+                          value={formData.State}
                           placeholder="State/Region"
                           onChange={handleChange}
-                          autoComplete="current-state"
                           required
-                          className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-cyan-400 focus:z-10 sm:text-sm"
+                          className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-cyan-400 focus:z-10 sm:text-sm"
                         />
                       </div>
                       <div className="mt-5">
                         <input
-                          id="phone"
+                          id="phoneNumber"
                           type="tel"
-                          name="phone"
-                          value={formData.phone}
+                          name="phoneNumber"
+                          value={formData.phoneNumber}
                           placeholder="Phone Number"
                           onChange={handleChange}
-                          autoComplete="current-phone"
                           required
-                          className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-cyan-400 focus:z-10 sm:text-sm"
+                          className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-cyan-400 focus:z-10 sm:text-sm"
                         />
+                      </div>
+                      <div className="mt-5">
+                        <textarea
+                          id="WhyYouWantToBeACeeManAgent"
+                          name="WhyYouWantToBeACeeManAgent"
+                          value={formData.WhyYouWantToBeACeeManAgent}
+                          placeholder="Why do you want to be a Ceeman Agent?"
+                          onChange={handleChange}
+                          required
+                          className="appearance-none placeholder:text-sm placeholder:font-bold rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-cyan-400 focus:z-10 sm:text-sm h-32"
+                        ></textarea>
                       </div>
                     </div>
                     <div className="mt-6">
@@ -191,22 +190,24 @@ function Agent() {
                               You have successfully applied to be a Ceeman
                               Agent. We will get back to you soon!{" "}
                             </p>
-                            <Link to={"/signin"}>
-                              <button
-                                // onClick={() => setShowPopup(false)}
-                                className="bg-[#2544D8] text-white w-full  py-2 px-9 rounded hover:bg-blue-600"
-                              >
-                                Continue
-                              </button>
-                            </Link>
-                            <Link to={"/products"}>
-                              <button
-                                // onClick={() => setShowPopup(false)}
-                                className="bg-[#2544D8] text-white w-full  py-2 px-9 rounded hover:bg-blue-600"
-                              >
-                                See Products
-                              </button>
-                            </Link>
+                            <div className="flex flex-col gap-3 w-full">
+                              <Link to={"/"}>
+                                <button
+                                  // onClick={() => setShowPopup(false)}
+                                  className="bg-[#2544D8] text-white md:w-1/2 w-full   py-2 px-9  hover:bg-blue-600"
+                                >
+                                  Continue
+                                </button>
+                              </Link>
+                              <Link to={"/product"}>
+                                <button
+                                  // onClick={() => setShowPopup(false)}
+                                  className="bg-[#2544D8] text-white w-full md:w-1/2  py-2 px-9  hover:bg-blue-600"
+                                >
+                                  See Products
+                                </button>
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       </div>

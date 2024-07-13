@@ -11,7 +11,7 @@ function Advert() {
             <h2 className="md:text-3xl text-xl md:text-left text-center font-semibold text-white uppercase ">
               ceeman delivers to you
             </h2>
-            <p className="text-base md:text-left text-center font-normal">
+            <p className="text-base md:text-lef text-white text-center font-normal">
               Nationwide delivery: We deliver right to your doorstep
             </p>
             <Link to={"/product"}>
@@ -22,7 +22,7 @@ function Advert() {
             <img
               src={man}
               alt=""
-              className="md:absolute md:top-0 md:left-0 md:-mt-20 md:-mr-0 w-full md:w-96 z-0"
+              className="md:absolute md:top-0 md:left-0 md:-mt-28 md:-mr-0 w-full md:w-96 z-0"
             />
           </div>
         </div>

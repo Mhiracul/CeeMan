@@ -1,36 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Logo from "../assets/svg/Ceeman logo white BLUE 1.svg";
+import Logo from "../assets/images/Ceeman logo white BLUE 1.svg";
 import { IoCartOutline } from "react-icons/io5";
 import { logout } from "../actions/authActions";
+import { fetchTotalCartItems } from "../actions/cartActions";
+import { viewProducts } from "../actions/productActions";
+
 function Navbar() {
-  const { cartTotalQuantity } = useSelector((state) => state.cart || {});
   const [showNav, setShowNav] = useState(false);
   const { isAuthenticated } = useSelector((state) => state.auth || {});
   const dispatch = useDispatch();
+  const { totalCartItems } = useSelector((state) => state.cart || {});
+
+  useEffect(() => {
+    dispatch(viewProducts());
+    dispatch(fetchTotalCartItems()); // Fetch total cart items on component mount
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("Total Cart Items:", totalCartItems); // Log totalCartItems
+  }, [totalCartItems]); // Log whenever totalCartItems changes
 
   const toggleMenu = () => {
     setShowNav(!showNav);
   };
+
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const getNavLinkClass = ({ isActive }) =>
+    isActive ? "text-[#E8998D]" : "text-gray-900";
+
   return (
     <>
-      <div className="w-full z-10 !bg-transparent py-[1rem] px-[2rem]">
+      <div className="w-full z-10 !bg-transparent py-[1rem] md:px-[2rem] px-4">
         <nav className="rounded-lg bg-[#2544D8] py[-1rem] shadow-custom">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
-            <Link to="/" className="flex items-center">
+            <NavLink to="/" className="flex items-center">
               <img src={Logo} className="md:h-14 h-8 mr-3" alt="Ceeman Logo" />
               <span className="self-center specialText text-3xl font-semibold whitespace-nowrap dark:text-white"></span>
-            </Link>
+            </NavLink>
             <button
               data-collapse-toggle="navbar-default"
               type="button"
               onClick={() => toggleMenu()}
-              className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 "
               aria-controls="navbar-default"
               aria-expanded="false"
             >
@@ -55,70 +72,92 @@ function Navbar() {
               }`}
               id="navbar-default"
             >
-              <ul className="font-medium text-[1.rem] flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-transparent md:flex-row md:items-center md:space-x-8 md:mt-0 md:border-0 md:bg-transparent bg-[#2544D8] dark:border-gray-700">
+              <ul className="font-medium md:text-sm text-xs flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-transparent md:flex-row md:items-center md:space-x-8 md:mt-0 md:border-0 md:bg-transparent bg-[#2544D8] dark:border-gray-700">
                 <li>
-                  <Link
+                  <NavLink
                     to="/"
-                    className="block py-2 pl-3 pr-4 text-white bg-cyan-400 rounded md:bg-transparent md:text-cyan-400 md:p-0 dark:text-white md:dark:text-[#E8998D] transition-all duration-700"
-                    aria-current="page"
+                    className={({ isActive }) =>
+                      `block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 dark:text-white md:dark:text-[#E8998D] transition-all duration-700 ${getNavLinkClass(
+                        { isActive }
+                      )}`
+                    }
+                    exact
                   >
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/product"
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700"
+                    className={({ isActive }) =>
+                      `block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700 ${getNavLinkClass(
+                        { isActive }
+                      )}`
+                    }
                   >
                     Products
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/about"
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700"
+                    className={({ isActive }) =>
+                      `block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700 ${getNavLinkClass(
+                        { isActive }
+                      )}`
+                    }
                   >
                     About Us
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/agent"
-                    className="block py-2 pl-3 pr-4 border-white border text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-2 md:px-4 md:py-2 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] md:dark:hover:bg-white transition-all ease-in-out duration-1000 hover:px-5 dark:hover:text-white md:dark:hover:bg-transparent"
+                    className={({ isActive }) =>
+                      `block py-1 px-1 md:mb-0 mb-3 border-white border rounded hover:bg-gray-100 md:hover:bg-transparent md:border-2 md:px-2 md:py-1 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] md:dark:hover:bg-white transition-all ease-in-out duration-1000 hover:px-5 dark:hover:text-white md:dark:hover:bg-transparent ${getNavLinkClass(
+                        { isActive }
+                      )}`
+                    }
                   >
-                    Become an Agent
-                  </Link>
+                    Become a Distributor
+                  </NavLink>
                 </li>
                 {isAuthenticated ? (
-                  <li>
+                  <li className="bg-white px-3 py-1 text-[#2544D8]">
                     <button
                       onClick={handleLogout}
-                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700"
+                      className="block py-2 pl-3 pr-4 text-gray-900 bg-white shadow-sm rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-black md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700"
                     >
                       Logout
                     </button>
                   </li>
                 ) : (
-                  <li>
-                    <Link
+                  <li className="bg-white px-3 py-1 text-[#2544D8]">
+                    <NavLink
                       to="/signin"
-                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700"
+                      className={({ isActive }) =>
+                        `block md:py-2 py-1 px-3 hover:bg-gray-100 text-xs  shadow-sm  md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 text-[#2544D8] md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700 ${getNavLinkClass(
+                          { isActive }
+                        )}`
+                      }
                     >
                       Sign In
-                    </Link>
+                    </NavLink>
                   </li>
                 )}
-                <li>
-                  <Link
-                    to="/check"
-                    className="flex justify-start items-center font-bold py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#C7E8F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700"
+                <li class="font-sans flex items-center   mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-sm text-white ">
+                  <a
+                    href="/check"
+                    role="button"
+                    class="relative flex max-w-[50px]"
                   >
-                    <IoCartOutline />
-
-                    <span className="ml-1 px-2 text-left rounded-full bg-[#E8998D]">
-                      {cartTotalQuantity}
+                    <IoCartOutline className="" size={20} />
+                    <span className="absolute right-0  top-0 rounded-full flex justify-center items-center bg-white w-3 h-3 top right p-0 m-0 text-black font-mono text-[9px]  leading-tight text-center">
+                      {totalCartItems !== null && totalCartItems !== undefined
+                        ? totalCartItems
+                        : 0}
                     </span>
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>

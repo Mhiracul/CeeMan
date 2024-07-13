@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import { ADD_TO_CART_FAIL, addToCart } from "../actions/cartActions";
-import Notification from "../components/Notification"; // Import the Notification component
+import { toast } from "react-hot-toast";
+import Breadcrumbs from "../BreadCrumb/BreadCrumbs";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -14,7 +15,6 @@ const ProductDetails = () => {
   const product = useSelector((state) =>
     state.products.products.find((p) => p.ProductID === id)
   );
-  const [showNotification, setShowNotification] = useState(false);
 
   if (!product) {
     return <p>Product not found</p>;
@@ -27,10 +27,10 @@ const ProductDetails = () => {
   const handleAddToCart = async () => {
     try {
       await dispatch(addToCart(product.ProductID));
-      setShowNotification(true);
+      toast.success("Product has been added to cart");
     } catch (error) {
       console.error("Failed to add to cart:", error);
-      // Optionally display an error notification
+      // Optionally handle error
     }
   };
 
@@ -41,13 +41,11 @@ const ProductDetails = () => {
   return (
     <div>
       <Navbar />
-      {showNotification && (
-        <Notification
-          message="Product has been added to cart"
-          type="success"
-          onClose={() => setShowNotification(false)}
-        />
-      )}
+      <div className="px-10">
+        {" "}
+        <Breadcrumbs />
+      </div>
+
       <div className="grid grid-cols-12 px-[2rem] py-20 gap-4">
         <div className="col-span-12 border bg-[#E5E9FA] h-full xl:col-span-8">
           <div className="flex md:flex-row flex-col items-start">

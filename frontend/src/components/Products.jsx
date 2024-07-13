@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { viewProducts } from "../actions/productActions";
 import StarRatings from "react-star-ratings";
+import { Link } from "react-router-dom";
 
 const Products = ({ products = [], loading, viewProducts }) => {
   useEffect(() => {
     viewProducts();
   }, [viewProducts]);
+
   const formatPrice = (price) => {
     // Remove .00 and keep the ₦ symbol
     return price.replace(/\.00$/, "");
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col items-center">
       <div className="bg-[#1B191E] w-full py-2">
-        {" "}
         <h2 className="text-white text-center font-poppins font-normal text-2xl">
           Products
         </h2>
@@ -23,7 +24,7 @@ const Products = ({ products = [], loading, viewProducts }) => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="grid md:grid-cols-2 grid-cols-1 px-10 gap-6 container mx-auto py-20">
+        <div className="grid md:grid-cols-2 grid-cols-1 px-10 gap-6 max-w-2xl container mx-auto py-20">
           {products.length > 0 ? (
             products.map((product) => {
               const originalPrice = parseFloat(
@@ -65,10 +66,17 @@ const Products = ({ products = [], loading, viewProducts }) => {
               );
             })
           ) : (
-            <p className="text-center  py-2">No products available</p>
+            <p className="text-center py-2">No products available</p>
           )}
         </div>
       )}
+      <div className="w-full flex justify-center mb-20 py-10">
+        <Link to={"/product"}>
+          <button className="mt-2 w-[13rem] text-white bg-[#1B191E] py-1 font-400 text-sm">
+            See More Products...
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

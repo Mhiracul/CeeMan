@@ -15,7 +15,7 @@ function Hero() {
 
   return (
     <div
-      className="w-full h-full font-poppins"
+      className="w-full bg-white h-full font-poppins"
       style={{
         backgroundImage: `url(${hero})`,
         backgroundSize: "cover",
@@ -33,10 +33,10 @@ function Hero() {
               Reliable and Efficient Power Solutions for Every Need
             </p>
 
-            <div className="flex md:flex-row flex-col gap-4 py-10">
+            <div className="flex md:flex-row flex-col gap-4 mt-8 py-10">
               <Link
                 to="/contact"
-                className="text-white bg-[#1B191E] text-center text-sm w-full px-8 py-2"
+                className="text-white bg-[#1B191E] text-center text-sm md:w-1/4 w-full px-8 py-2"
               >
                 <button
                   className={`${animate ? "animate-slideInLeft" : ""}`}
@@ -47,7 +47,7 @@ function Hero() {
               </Link>{" "}
               <Link
                 to="/signup"
-                className="text-center border-[#1B191E] border w-full text-sm text-black  px-8 py-2"
+                className="text-center  border-[#1B191E] border md:w-1/4 w-full text-sm text-black  px-8 py-2"
               >
                 {" "}
                 <button

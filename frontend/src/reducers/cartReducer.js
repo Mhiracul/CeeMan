@@ -1,3 +1,4 @@
+// cartReducer.js
 import {
   ADD_TO_CART_SUCCESS,
   ADD_TO_CART_FAIL,
@@ -9,10 +10,13 @@ import {
   DECREASE_QUANTITY_FAIL,
   DELETE_CART_ITEM_SUCCESS,
   DELETE_CART_ITEM_FAIL,
+  FETCH_TOTAL_CART_ITEMS_SUCCESS,
+  FETCH_TOTAL_CART_ITEMS_FAIL,
 } from "../actions/cartActions";
 
 const initialState = {
   cartItems: [],
+  totalCartItems: 0,
   loading: false,
   error: null,
 };
@@ -31,6 +35,7 @@ const cartReducer = (state = initialState, action) => {
     case INCREASE_QUANTITY_FAIL:
     case DECREASE_QUANTITY_FAIL:
     case DELETE_CART_ITEM_FAIL:
+    case FETCH_TOTAL_CART_ITEMS_FAIL:
       return {
         ...state,
         error: action.payload,
@@ -71,6 +76,14 @@ const cartReducer = (state = initialState, action) => {
         cartItems: state.cartItems.filter(
           (item) => item.CartItemID !== action.payload.CartItemID
         ),
+        loading: false,
+        error: null,
+      };
+    case FETCH_TOTAL_CART_ITEMS_SUCCESS:
+      console.log("Total Cart Items:", action.payload); // Log the payload to see what's being received
+      return {
+        ...state,
+        totalCartItems: action.payload,
         loading: false,
         error: null,
       };
