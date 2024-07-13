@@ -131,11 +131,17 @@ const Checkout = ({ item }) => {
         });
     }
   };
-  const handleDeleteCartItem = (cartItemId) => {
-    // Show confirmation dialog before deleting
-    setConfirmItemId(cartItemId);
-  };
 
+  const handleDeleteCartItem = (cartItemId) => {
+    dispatch(deleteCartItem(cartItemId));
+    setConfirmItemId(cartItemId)
+      .then(() => {
+        toast.success("Item deleted successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to delete item");
+      });
+  };
   const confirmDelete = (confirm) => {
     if (confirm) {
       dispatch(deleteCartItem(confirmItemId))
@@ -189,7 +195,11 @@ const Checkout = ({ item }) => {
         <div className="grid grid-cols-12 px-[2rem] py-20 gap-4">
           {/* Cart Items */}
           <div className="col-span-12 border bg-[#E5E9FA] h-full xl:col-span-8">
-            {cartItems.length === 0 && <p>No items in the cart.</p>}
+            {cartItems.length === 0 && (
+              <p className=" flex flex-col justify-center items-center text-center">
+                No items in the cart.
+              </p>
+            )}
             {cartItems.map((item) => (
               <div
                 key={item.CartItemID}

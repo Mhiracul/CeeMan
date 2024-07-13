@@ -12,7 +12,6 @@ function Home() {
     <>
       <section className="w-full">
         <div className="h-full relative">
-          <Navbar />
           <Hero />
         </div>
         <Products /> <Advert />

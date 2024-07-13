@@ -171,7 +171,6 @@ const SignUp = () => {
                   className="absolute right-2 top-[70%] transform -translate-y-1/2 cursor-pointer"
                 />
               </div>
-              {error && <p className="text-red-500 mb-4">{error}</p>}
               {/* TERMS AND CONDITIONS */}
               <Switch.Group
                 as="div"
@@ -234,16 +233,16 @@ const SignUp = () => {
           {/* {success && <p style={{ color: "green" }}>{success}</p>} */}
 
           {success && (
-            <div>
+            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
               <div className="  w-full lg:h-screen bg-white bg-opacity-50  md:h-screen h-full flex lg:flex-row md:flex-row flex-col">
                 <Sidebar
                   logo={logo}
                   imageSrc={imgo}
                   heading={`Driven by Power,\nDefined by Reliability`}
-                  sizeClass={`w-1/2 capitalize mx-auto  absolute bottom-0`}
+                  sizeClass={`w-[50%] px-10  capitalize mx-auto  absolute bottom-0`}
                 />
                 <div className="w-full flex items-center  h-full bg-white">
-                  <div className="bg-white text-[#2544D8] px-10 py-8 text-center rounded-lg w-full">
+                  <div className="bg-white  text-[#2544D8] px-10 py-8 text-center rounded-lg w-full">
                     <img
                       src={blueTick}
                       alt="Blue_Tick_For_Validation"

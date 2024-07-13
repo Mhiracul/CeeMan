@@ -3,6 +3,7 @@ import gen from "../assets/images/6 3.svg";
 import frame from "../assets/images/Frame 788.png";
 import { Link } from "react-router-dom";
 import hero from "../assets/images/Hero rectangle.svg";
+import Navbar from "./Navbar";
 
 function Hero() {
   const [animate, setAnimate] = useState(false);
@@ -16,7 +17,7 @@ function Hero() {
 
   return (
     <div
-      className="w-full bg-white h-full font-poppins"
+      className="w-full bg-white h-full font-gilroy relative"
       style={{
         backgroundImage: `url(${hero})`,
         backgroundSize: "cover",
@@ -24,9 +25,10 @@ function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className=" py-20">
+      <Navbar />
+      <div className=" ">
         <div className="flex md:flex-row flex-col justify-between">
-          <div className="container mx-auto px-10">
+          <div className="container relative max-w-3xl py-20 mx-auto px-10">
             <h1 className="text-[#1B191E] max-w-[26rem] md:leading-[60px] leading-8 md:text-4xl text-xl font-semibold">
               Powering <br /> Your Future <br /> One Watt at a Time!
             </h1>
@@ -65,7 +67,7 @@ function Hero() {
           </div>
 
           <div>
-            <img src={gen} alt="" className="md:w-[38rem] w-full" />
+            <img src={gen} alt="" className="md:w-[30rem] mt-10 w-full" />
           </div>
         </div>
       </div>

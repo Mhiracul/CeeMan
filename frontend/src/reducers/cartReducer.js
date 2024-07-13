@@ -60,14 +60,10 @@ const cartReducer = (state = initialState, action) => {
         loading: false,
         error: null,
       };
-    case DECREASE_QUANTITY_SUCCESS:
+    case DELETE_CART_ITEM_SUCCESS:
       return {
         ...state,
-        cartItems: state.cartItems.map((item) =>
-          item.CartItemID === action.payload.updatedItem.CartItemID
-            ? action.payload.updatedItem
-            : item
-        ),
+        cartItems: action.payload, // Update cartItems with the new list after deletion
         loading: false,
         error: null,
       };

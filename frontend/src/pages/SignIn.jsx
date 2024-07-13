@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import blueTick from "../assets/images/Blue tick.png";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const initialFormData = {
@@ -69,6 +70,7 @@ const SignIn = () => {
         localStorage.setItem("auth", token); // Store token in local storage
         dispatch({ type: "LOGIN_SUCCESS", payload: data.token }); // Update auth state
         navigate("/"); // Redirect to home page
+        toast.success("Signed In Successfully"); // Show success toast
       } else {
         console.error("Login failed:", data.message || "Unknown error");
       }

@@ -38,7 +38,7 @@ const AppContent = ({ setLoading }) => {
       <Route path="/test" element={<Test />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/product" element={<Products />} />
-      <Route path="/check" element={<Checkout />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="/product-details/:id" element={<ProductDetails />} />
     </Routes>
   );

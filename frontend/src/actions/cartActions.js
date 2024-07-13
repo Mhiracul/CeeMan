@@ -186,7 +186,8 @@ export const decreaseCartItemQuantity =
   };
 
 // Delete a cart item
-export const deleteCartItem = (cartItemId) => async (dispatch) => {
+// Delete a cart item
+export const deleteCartItem = (cartItemId) => async (dispatch, getState) => {
   const token = localStorage.getItem("auth");
 
   if (!token) {
@@ -204,12 +205,21 @@ export const deleteCartItem = (cartItemId) => async (dispatch) => {
       },
     };
 
-    const response = await axios.delete(
+    // Delete the item from the backend
+    await axios.delete(
       `https://ceeman-back.onrender.com/api/cart/${cartItemId}/delete`,
       config
     );
 
-    dispatch({ type: DELETE_CART_ITEM_SUCCESS, payload: response.data });
+    // Remove the item from the Redux store immediately
+    const updatedCartItems = getState().cart.cartItems.filter(
+      (item) => item.CartItemID !== cartItemId
+    );
+
+    dispatch({ type: DELETE_CART_ITEM_SUCCESS, payload: updatedCartItems });
+
+    // Fetch updated total number of cart items
+    dispatch(fetchTotalCartItems()); // Fetch total cart items again
   } catch (error) {
     dispatch({
       type: DELETE_CART_ITEM_FAIL,
