@@ -13,20 +13,25 @@ export const DELETE_CART_ITEM_SUCCESS = "DELETE_CART_ITEM_SUCCESS";
 export const DELETE_CART_ITEM_FAIL = "DELETE_CART_ITEM_FAIL";
 export const FETCH_TOTAL_CART_ITEMS_SUCCESS = "FETCH_TOTAL_CART_ITEMS_SUCCESS";
 export const FETCH_TOTAL_CART_ITEMS_FAIL = "FETCH_TOTAL_CART_ITEMS_FAIL";
+export const SET_TOTAL_CART_ITEMS = "SET_TOTAL_CART_ITEMS";
 
 // Add a product to cart
-// Add a product to cart
-// Add a product to cart
-export const addToCart = (productId) => async (dispatch) => {
+export const addToCart = (productId) => async (dispatch, getState) => {
   const token = localStorage.getItem("auth");
 
   if (!token) {
     dispatch({
-      type: "ADD_TO_CART_FAIL",
+      type: ADD_TO_CART_FAIL,
       payload: "No authentication token found.",
     });
     return;
   }
+
+  const currentTotal = getState().cart.totalCartItems || 0;
+  dispatch({
+    type: SET_TOTAL_CART_ITEMS,
+    payload: currentTotal + 1,
+  });
 
   try {
     const response = await axios.post(
@@ -38,8 +43,6 @@ export const addToCart = (productId) => async (dispatch) => {
         },
       }
     );
-
-    console.log("Response from addToCart:", response.data); // Log the response
 
     dispatch({
       type: ADD_TO_CART_SUCCESS,
@@ -56,7 +59,6 @@ export const addToCart = (productId) => async (dispatch) => {
   }
 };
 
-// View cart items
 // View cart items
 export const viewCart = () => async (dispatch) => {
   const token = localStorage.getItem("auth");
@@ -92,11 +94,10 @@ export const viewCart = () => async (dispatch) => {
     });
   }
 };
-
 // Increase quantity of an item in cart
 // Increase quantity of an item in cart
 export const increaseCartItemQuantity =
-  (cartItemId, amount) => async (dispatch) => {
+  (cartItemId, amount) => async (dispatch, getState) => {
     const token = localStorage.getItem("auth");
 
     if (!token) {
@@ -106,6 +107,12 @@ export const increaseCartItemQuantity =
       });
       return;
     }
+
+    const currentTotal = getState().cart.totalCartItems || 0;
+    dispatch({
+      type: SET_TOTAL_CART_ITEMS,
+      payload: currentTotal + amount,
+    });
 
     try {
       const config = {
@@ -120,9 +127,8 @@ export const increaseCartItemQuantity =
         config
       );
 
-      console.log("Response from increaseCartItemQuantity:", response.data); // Log the response
-
       dispatch({ type: INCREASE_QUANTITY_SUCCESS, payload: response.data });
+      return response.data;
     } catch (error) {
       dispatch({
         type: INCREASE_QUANTITY_FAIL,
@@ -136,7 +142,7 @@ export const increaseCartItemQuantity =
 
 // Decrease quantity of an item in cart
 export const decreaseCartItemQuantity =
-  (cartItemId, amount) => async (dispatch) => {
+  (cartItemId, amount) => async (dispatch, getState) => {
     const token = localStorage.getItem("auth");
 
     if (!token) {
@@ -146,6 +152,12 @@ export const decreaseCartItemQuantity =
       });
       return;
     }
+
+    const currentTotal = getState().cart.totalCartItems || 0;
+    dispatch({
+      type: SET_TOTAL_CART_ITEMS,
+      payload: currentTotal - amount,
+    });
 
     try {
       const config = {
@@ -160,9 +172,8 @@ export const decreaseCartItemQuantity =
         config
       );
 
-      console.log("Response from decreaseCartItemQuantity:", response.data); // Log the response
-
       dispatch({ type: DECREASE_QUANTITY_SUCCESS, payload: response.data });
+      return response.data;
     } catch (error) {
       dispatch({
         type: DECREASE_QUANTITY_FAIL,
@@ -173,6 +184,8 @@ export const decreaseCartItemQuantity =
       });
     }
   };
+
+// Delete a cart item
 export const deleteCartItem = (cartItemId) => async (dispatch) => {
   const token = localStorage.getItem("auth");
 
@@ -207,6 +220,8 @@ export const deleteCartItem = (cartItemId) => async (dispatch) => {
     });
   }
 };
+
+// Fetch total cart items
 export const fetchTotalCartItems = () => async (dispatch) => {
   const token = localStorage.getItem("auth");
 

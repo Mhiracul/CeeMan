@@ -61,7 +61,7 @@ function Agent() {
         <Sidebar
           logo={logo}
           imageSrc={img}
-          heading={`Become a Ceeman Agent`}
+          heading={`Become a Ceeman\n Distributor`}
           sizeClass={`w-1/2  capitalize mx-auto  absolute bottom-0`}
         />
         <div className="w-full flex items-center justify-center h-full bg-white">

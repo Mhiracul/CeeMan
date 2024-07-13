@@ -6,9 +6,9 @@ function Advert() {
   return (
     <section className="relative w-full bg-[#2544D8]">
       <div className="container mx-auto px-10 py-20 relative z-10">
-        <div className="flex md:flex-row-reverse flex-col items-center">
-          <div className="flex flex-col md:items-start items-center gap-4 max-w-md md:w-1/2 md:pr-8">
-            <h2 className="md:text-3xl text-xl md:text-left text-center font-semibold text-white uppercase ">
+        <div className="flex md:flex-row-reverse  flex-col items-center">
+          <div className="flex flex-col lg:items-start md:items-center items-center gap-4 max-w-md md:w-1/2 lg:pr-8 md:pl-10">
+            <h2 className="md:text-3xl text-xl lg:text-left md:text-center text-center font-semibold text-white uppercase ">
               ceeman delivers to you
             </h2>
             <p className="text-base md:text-lef text-white text-center font-normal">

@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/svg/Ceeman logo white BLUE 1.svg";
+import logo from "../assets/images/Ceeman logo white BLUE 1.svg";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdMailOutline } from "react-icons/md";
 import { GrLocation } from "react-icons/gr";

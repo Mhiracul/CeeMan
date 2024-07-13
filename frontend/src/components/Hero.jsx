@@ -3,6 +3,7 @@ import gen from "../assets/images/6 3.svg";
 import frame from "../assets/images/Frame 788.png";
 import { Link } from "react-router-dom";
 import hero from "../assets/images/Hero rectangle.svg";
+
 function Hero() {
   const [animate, setAnimate] = useState(false);
 
@@ -57,6 +58,9 @@ function Hero() {
                   Sign Up
                 </button>
               </Link>
+            </div>
+            <div className="w-full grid mt-10">
+              <img src={frame} alt="frame_illustration" />
             </div>
           </div>
 

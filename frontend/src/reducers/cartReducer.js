@@ -12,6 +12,7 @@ import {
   DELETE_CART_ITEM_FAIL,
   FETCH_TOTAL_CART_ITEMS_SUCCESS,
   FETCH_TOTAL_CART_ITEMS_FAIL,
+  SET_TOTAL_CART_ITEMS,
 } from "../actions/cartActions";
 
 const initialState = {
@@ -87,6 +88,15 @@ const cartReducer = (state = initialState, action) => {
         loading: false,
         error: null,
       };
+
+    case SET_TOTAL_CART_ITEMS:
+      return {
+        ...state,
+        totalCartItems: action.payload,
+        loading: false,
+        error: null,
+      };
+
     default:
       return state;
   }

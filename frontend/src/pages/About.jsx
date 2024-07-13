@@ -19,7 +19,7 @@ function About() {
           <Nav />
           <div className="py-20">
             <div className="flex md:flex-row flex-col justify-between">
-              <div className="container md:text-left text-center mx-auto  px-10">
+              <div className="container max-w-2xl  lg:text-left md:text-center text-center mx-auto  px-10">
                 <h1 className="md:text-3xl text-xl mb-5  capitalize font-bold text-[#2544D8]">
                   About us
                 </h1>

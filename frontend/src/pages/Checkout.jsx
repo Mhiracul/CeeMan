@@ -16,7 +16,7 @@ import ClipLoader from "react-spinners/ClipLoader"; // Import loader component
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 
-const Checkout = () => {
+const Checkout = ({ item }) => {
   const dispatch = useDispatch();
   const { cartItems, loading, error } = useSelector((state) => state.cart);
   const [showNotification, setShowNotification] = useState(false);
@@ -32,7 +32,7 @@ const Checkout = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [hostedLink, setHostedLink] = useState("");
   const token = localStorage.getItem("auth");
-
+  const [quantity, setQuantity] = useState(item?.quantity || 1);
   useEffect(() => {
     const fetchStates = async () => {
       try {
@@ -103,21 +103,34 @@ const Checkout = () => {
   const handleIncreaseQuantity = (cartItemId, event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
+    setQuantity(quantity + 1);
     dispatch(increaseCartItemQuantity(cartItemId, 1))
-      .then(() => {
+      .then((updatedItem) => {
+        setQuantity(updatedItem.quantity); // Sync with server response
         toast.success("Item quantity increased!");
       })
       .catch((error) => {
+        setQuantity(quantity); // Revert to original quantity on error
         toast.error("Failed to increase item quantity");
         console.error("Increase quantity error:", error);
       });
   };
 
   const handleDecreaseQuantity = (cartItemId) => {
-    dispatch(decreaseCartItemQuantity(cartItemId, -1));
-    toast.success("Item quantity decreased!");
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+      dispatch(decreaseCartItemQuantity(cartItemId, 1))
+        .then((updatedItem) => {
+          setQuantity(updatedItem.quantity); // Sync with server response
+          toast.success("Item quantity decreased!");
+        })
+        .catch((error) => {
+          setQuantity(quantity); // Revert to original quantity on error
+          toast.error("Failed to decrease item quantity");
+          console.error("Decrease quantity error:", error);
+        });
+    }
   };
-
   const handleDeleteCartItem = (cartItemId) => {
     // Show confirmation dialog before deleting
     setConfirmItemId(cartItemId);
@@ -220,7 +233,7 @@ const Checkout = () => {
                         <span>-</span>
                       </div>
                       <div className="bg-white shadow-md text-black md:text-sm text-xs md:py-2 py-1 md:px-4 px-2">
-                        <span>{item.quantity}</span>
+                        <span>{quantity}</span>
                       </div>
                       <div
                         onClick={(event) =>
@@ -248,7 +261,7 @@ const Checkout = () => {
                         </p>
                         <div className="bg-[#E5E9FA] inline-flex items-center gap-1 md:py-1 py-0.5 px-2 shadow-md">
                           <span className="bg-black text-white px-2 md:py-1 py-0.5 text-xs">
-                            {item.quantity}
+                            {quantity}
                           </span>
                           <span className="text-black md:text-xs text-[8px]">
                             ITEMS IN CART

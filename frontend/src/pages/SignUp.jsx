@@ -13,6 +13,7 @@ import imgo from "../assets/images/CEEMAN IMG (2) 1.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import blueTick from "../assets/images/Blue tick.png";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SignUp = () => {
   const initialFormData = {
@@ -101,10 +102,15 @@ const SignUp = () => {
           logo={logo}
           imageSrc={img}
           heading={`Let's Get Started`}
-          sizeClass={`w-1/2    capitalize mx-auto  absolute bottom-0`}
+          sizeClass={`w-[70%] capitalize mx-auto  absolute bottom-0`}
         />
         <div className="w-full flex items-center justify-center h-full bg-white">
           <div className="bg-white px-10 py-8 rounded-lg w-full">
+            <div className="mb-[4rem]">
+              <Link to={"/"}>
+                <IoMdArrowRoundBack size={30} />
+              </Link>
+            </div>
             <h2 className="text-2xl  font-bold mb-6">Create Account</h2>
             <form
               onSubmit={handleSubmit}

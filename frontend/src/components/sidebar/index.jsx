@@ -18,7 +18,7 @@ function Sidebar({ logo, imageSrc, heading, sizeClass }) {
       <img
         src={imageSrc}
         alt="generator_illustration"
-        className={`${sizeClass} lg:block md:block hidden`}
+        className={`${sizeClass} ml-32 lg:block md:block hidden`}
       />
     </div>
   );

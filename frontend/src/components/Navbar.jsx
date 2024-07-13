@@ -31,7 +31,7 @@ function Navbar() {
     dispatch(logout());
   };
 
-  const getNavLinkClass = ({ isActive }) =>
+  const getNavLinkClass = (isActive) =>
     isActive ? "text-[#E8998D]" : "text-gray-900";
 
   return (
@@ -76,11 +76,9 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/"
-                    className={({ isActive }) =>
-                      `block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 dark:text-white md:dark:text-[#E8998D] transition-all duration-700 ${getNavLinkClass(
-                        { isActive }
-                      )}`
-                    }
+                    className={`block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 dark:text-white md:text-[#E8998D] transition-all duration-700 ${getNavLinkClass(
+                      true
+                    )}`}
                     exact
                   >
                     Home
@@ -89,11 +87,9 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/product"
-                    className={({ isActive }) =>
-                      `block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700 ${getNavLinkClass(
-                        { isActive }
-                      )}`
-                    }
+                    className={`block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-400 md:p-0 dark:text-white md:text-[#E8998D] transition-all duration-700 ${getNavLinkClass(
+                      false
+                    )}`}
                   >
                     Products
                   </NavLink>
@@ -101,11 +97,9 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/about"
-                    className={({ isActive }) =>
-                      `block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-white md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700 ${getNavLinkClass(
-                        { isActive }
-                      )}`
-                    }
+                    className={`block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-400 md:p-0 dark:text-white md:text-[#E8998D] transition-all duration-700 ${getNavLinkClass(
+                      false
+                    )}`}
                   >
                     About Us
                   </NavLink>
@@ -151,8 +145,8 @@ function Navbar() {
                     role="button"
                     class="relative flex max-w-[50px]"
                   >
-                    <IoCartOutline className="" size={20} />
-                    <span className="absolute right-0  top-0 rounded-full flex justify-center items-center bg-white w-3 h-3 top right p-0 m-0 text-black font-mono text-[9px]  leading-tight text-center">
+                    <IoCartOutline className="" size={28} />
+                    <span className="absolute right-0  top-0 rounded-full flex justify-center items-center bg-white w-4 h-4 top right p-0 m-0 text-black font-mono text-[9px]  leading-tight text-center">
                       {totalCartItems !== null && totalCartItems !== undefined
                         ? totalCartItems
                         : 0}

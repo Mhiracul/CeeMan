@@ -52,7 +52,7 @@ function Contact() {
     <>
       <div className="h-full font-gilroy overflow-y-scroll no-scrollbar">
         <Nav />
-        <section className="relative bg-white w-[100vw] h-[89vh] flex justify-center items-center">
+        <section className="relative  bg-white md:w-[100vw] w-full h-full py-20 md:h-[89vh] flex justify-center items-center">
           <div className="bg-[#2544D8] rounded-lg w-[90vw] md:w-[70vw] lg:w-[50vw] md:h-[70vh] h-full ">
             <section className="w-full h-full flex flex-col md:flex-row items-center">
               <section className="w-full md:w-[40%] h-full md:h-[80%] shadow-md bg-[#fff] -ml-4 md:ml-0 p-5 md:p-0">
