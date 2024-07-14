@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const Products = ({ products = [], loading, viewProducts }) => {
   useEffect(() => {
     viewProducts();
+    window.scrollTo(0, 0); // Scroll to top of the page when component mounts
   }, [viewProducts]);
 
   const formatPrice = (price) => {

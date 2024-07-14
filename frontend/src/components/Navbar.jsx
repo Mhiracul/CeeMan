@@ -7,6 +7,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { logout } from "../actions/authActions";
 import { fetchTotalCartItems } from "../actions/cartActions";
 import { viewProducts } from "../actions/productActions";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const [showNav, setShowNav] = useState(false);
@@ -30,6 +31,7 @@ function Navbar() {
 
   const handleLogout = () => {
     dispatch(logout());
+    toast.success("Logout successfully");
   };
 
   // Function to determine the active class based on route match
@@ -100,7 +102,7 @@ function Navbar() {
                 <li>
                   <NavLink
                     to="/about"
-                    className={`block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-400 md:p-0  transition-all duration-700 ${getNavLinkClass(
+                    className={`block py-2 pl-3 pr-4 rounded transition-all ease-in-out duration-1000 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-cyan-400 md:p-0   ${getNavLinkClass(
                       "/about"
                     )}`}
                   >
@@ -121,7 +123,7 @@ function Navbar() {
                   <li className="bg-white px-3 py-1 text-[#2544D8]">
                     <button
                       onClick={handleLogout}
-                      className="block py-1  px-10 text-gray-900 bg-white shadow-sm rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-black md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700"
+                      className="block py-1  px-10 text-gray-900 bg-white shadow-sm rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 dark:text-black md:dark:hover:text-[#E8998D] dark:hover:bg-gray-700 transition-all ease-in-out duration-1000 dark:hover:text-white md:dark:hover:bg-transparent "
                     >
                       Logout
                     </button>
@@ -130,7 +132,7 @@ function Navbar() {
                   <li className="bg-white px-10 py-1 text-[#2544D8]">
                     <NavLink
                       to="/signin"
-                      className={`block md:py-1 py-1 px-10 hover:bg-gray-100  text-xs  shadow-sm  md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 text-[#2544D8] dark:text-[#2544D8] md:dark:hover:text-[#2544D8] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-700 ${getNavLinkClass(
+                      className={`block md:py-1 py-1 px-10 hover:bg-gray-100  text-xs  shadow-sm  md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 text-[#2544D8] dark:text-[#2544D8] md:dark:hover:text-[#2544D8] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-1000 ${getNavLinkClass(
                         "/signin"
                       )}`}
                     >

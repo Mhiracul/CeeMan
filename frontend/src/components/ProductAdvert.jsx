@@ -14,9 +14,9 @@ const ProductAdvert = () => {
             <p className="text-base text-white md:text-left text-center font-normal">
               Nationwide delivery: We deliver right to your doorstep
             </p>
-            <Link to={"/products"}>
+            <Link to={"/contact"}>
               <button className="mt-2 w-[13rem] text-white bg-[#1B191E] py-2 font-400 text-[1rem]">
-                Select Location
+                Contact Us
               </button>
             </Link>
             <img

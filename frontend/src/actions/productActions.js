@@ -11,30 +11,22 @@ export const VIEW_ONE_PRODUCT_FAIL = "VIEW_ONE_PRODUCT_FAIL";
 export const viewProducts = () => {
   return async (dispatch) => {
     try {
-      const token = localStorage.getItem("auth"); // Get token from local storage
-      console.log(token);
-
-      // const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNse…Tk4fQ.eh_k3ILr_bZpK93d9xcE8DPSNomPCel3Tn0E9sOj7SY`;
-
-      // const encodedToken = encodeURIComponent(token.trim());
-
+      const token = localStorage.getItem("auth"); // Make sure this is correct token
       const res = await axios.get(
         "https://ceeman-back.onrender.com/api/products/view",
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Pass token in the headers
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
       dispatch({ type: VIEW_PRODUCTS_SUCCESS, payload: res.data });
-      console.log(res.data);
     } catch (error) {
       dispatch({
         type: VIEW_PRODUCTS_FAIL,
         payload: error.response ? error.response.data.message : error.message,
       });
-      console.log(error.message);
     }
   };
 };
@@ -43,13 +35,12 @@ export const viewProducts = () => {
 export const viewOneProduct = (productId) => {
   return async (dispatch) => {
     try {
-      const token = localStorage.getItem("token"); // Get token from local storage
-
+      const token = localStorage.getItem("auth"); // Ensure the correct token
       const res = await axios.get(
         `https://ceeman-back.onrender.com/api/product/view/${productId}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Pass token in the headers
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -57,7 +48,7 @@ export const viewOneProduct = (productId) => {
     } catch (error) {
       dispatch({
         type: VIEW_ONE_PRODUCT_FAIL,
-        payload: error.response.data.message,
+        payload: error.response ? error.response.data.message : error.message,
       });
     }
   };

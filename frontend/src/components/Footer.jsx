@@ -15,11 +15,11 @@ function Footer() {
     <footer className="w-full h-full font-gilroy bg-[#222]">
       <div className="container mx-auto px-6">
         <div className=" flex items-center py-10  lg:flex-row md:flex-col md:gap-20 gap-10 flex-col ">
-          <div className="">
+          <div className="flex flex-col items-start">
             <img
               src={logo}
               alt="Ceeman_logo_illustration"
-              className="w-[50%] mb-4"
+              className="w-[40%] mb-4"
             />
             <p className="text-[#fff] text-base font-medium font-montserrat max-w-sm">
               Power your home, office and business with Ceeman Power Generators.

@@ -4,9 +4,11 @@ import frame from "../assets/images/Frame 788.png";
 import { Link } from "react-router-dom";
 import hero from "../assets/images/Hero rectangle.svg";
 import Navbar from "./Navbar";
+import { useSelector } from "react-redux";
 
 function Hero() {
   const [animate, setAnimate] = useState(false);
+  const { isAuthenticated } = useSelector((state) => state.auth || {}); // Get isAuthenticated from Redux state
 
   const handleClick = () => {
     setAnimate(true);
@@ -48,18 +50,19 @@ function Hero() {
                   Contact Us
                 </button>
               </Link>{" "}
-              <Link
-                to="/signup"
-                className="text-center  border-[#1B191E] border md:w-1/4 w-full text-sm text-black  px-8 py-2"
-              >
-                {" "}
-                <button
-                  className={`${animate ? "animate-slideInLeft" : ""}`}
-                  onClick={handleClick}
+              {!isAuthenticated && ( // Conditionally render the Sign Up button if not authenticated
+                <Link
+                  to="/signup"
+                  className="text-center border-[#1B191E] border md:w-1/4 w-full text-sm text-black px-8 py-2"
                 >
-                  Sign Up
-                </button>
-              </Link>
+                  <button
+                    className={`${animate ? "animate-slideInLeft" : ""}`}
+                    onClick={handleClick}
+                  >
+                    Sign Up
+                  </button>
+                </Link>
+              )}
             </div>
             <div className="w-full grid mt-10">
               <img src={frame} alt="frame_illustration" />

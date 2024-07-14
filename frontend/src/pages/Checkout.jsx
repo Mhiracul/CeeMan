@@ -9,12 +9,15 @@ import {
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { BsChevronLeft } from "react-icons/bs";
+import { BsChevronRight } from "react-icons/bs";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Breadcrumbs from "../BreadCrumb/BreadCrumbs";
 import ClipLoader from "react-spinners/ClipLoader"; // Import loader component
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
+import ReactPaginate from "react-paginate";
 
 const Checkout = ({ item }) => {
   const dispatch = useDispatch();
@@ -33,6 +36,9 @@ const Checkout = ({ item }) => {
   const [hostedLink, setHostedLink] = useState("");
   const token = localStorage.getItem("auth");
   const [quantity, setQuantity] = useState(item?.quantity || 1);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 2;
+
   useEffect(() => {
     const fetchStates = async () => {
       try {
@@ -180,6 +186,14 @@ const Checkout = ({ item }) => {
     }
   };
 
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+  };
+
+  const offset = currentPage * itemsPerPage;
+  const currentItems = cartItems.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(cartItems.length / itemsPerPage);
+
   return (
     <div className="font-gilroy">
       <Navbar />
@@ -200,7 +214,7 @@ const Checkout = ({ item }) => {
                 No items in the cart.
               </p>
             )}
-            {cartItems.map((item) => (
+            {currentItems.map((item) => (
               <div
                 key={item.CartItemID}
                 className="flex md:flex-row flex-col items-start border-b py-4"
@@ -417,6 +431,30 @@ const Checkout = ({ item }) => {
           </div>
         </div>
       )}
+      <ReactPaginate
+        previousLabel={
+          <span className="w-10 h-10 flex mr-4 items-center justify-center bg-gray-100 rounded-md">
+            {" "}
+            <BsChevronLeft />
+          </span>
+        }
+        nextLabel={
+          <span className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-md">
+            {" "}
+            <BsChevronRight />
+          </span>
+        }
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={"flex  items-center   justify-center mt-8 mb-4"}
+        pageClassName="block border bg-[#F2F4F5] border-solid border-gray-100 hover:bg-[#2544D8] hover:text-white text-[#767676] w-10 h-10 gap-4 mr-4 flex items-center justify-center rounded-md"
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+      />
       {/* Confirmation Dialog */}
       {confirmItemId && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
@@ -439,6 +477,7 @@ const Checkout = ({ item }) => {
           </div>
         </div>
       )}
+
       <Footer />
     </div>
   );

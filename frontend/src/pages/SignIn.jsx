@@ -24,7 +24,6 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   // const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -65,7 +64,6 @@ const SignIn = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess("Login successful");
         const token = data.token;
         localStorage.setItem("auth", token); // Store token in local storage
         dispatch({ type: "LOGIN_SUCCESS", payload: data.token }); // Update auth state
@@ -145,24 +143,12 @@ const SignIn = () => {
               >
                 {status === "loading" ? "Signing in..." : "Sign In"}
               </button>
-              <section className="mt-[3rem] flex w-[60%] justify-between items-center m-auto">
-                <div className="w-[4rem] h-[3px] bg-[#D9D9D9]"></div>
-                <h5 className="font-[900] text-sm text-[#999] text-center">
-                  Or Continue With
-                </h5>
-                <div className="w-[4rem] h-[3px] bg-[#D9D9D9]"></div>{" "}
-              </section>{" "}
-              <div className="w-[40%] flex justify-center font-[4rem] mx-auto mt-[2rem]">
-                {" "}
-                <FaFacebookF
-                  style={{
-                    fontSize: "1.5rem",
-                    marginRight: "20px",
-                    color: "#2544D8",
-                  }}
-                />
-                <FcGoogle style={{ fontSize: "1.5rem" }} />
-              </div>
+              <p className="text-center w-full inline-flex gap-0.5 items-center justify-center mt-4 text-sm font-bold">
+                Don't Have an Account?
+                <Link to="/signup" className="text-[#2544D8]">
+                  Sign Up
+                </Link>
+              </p>
             </form>
           </div>
           {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
