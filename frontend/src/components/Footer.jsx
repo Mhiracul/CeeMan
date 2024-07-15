@@ -48,7 +48,10 @@ function Footer() {
                   <Link className="cursor-pointer inline-flex gap-3 items-center">
                     {" "}
                     <MdMailOutline />
-                    <a href="mailto:info@ceeman.com"> info@ceeman.com</a>
+                    <a href="mailto:royalceeman@gmail.com">
+                      {" "}
+                      royalceeman@gmail.com
+                    </a>
                   </Link>
                 </li>
                 <li className="inline-flex gap-3 items-center">

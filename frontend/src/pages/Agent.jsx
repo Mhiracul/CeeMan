@@ -19,7 +19,7 @@ function Agent() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +42,7 @@ function Agent() {
       // console.log(data);
 
       // Assuming success for demonstration
-      setShowPopup(true);
+      setShowPopup("Application submitted successfully!");
       toast.success("Application submitted successfully!");
       resetForm();
     } catch (error) {
@@ -62,13 +62,13 @@ function Agent() {
           logo={logo}
           imageSrc={img}
           heading={`Become a Ceeman\n Distributor`}
-          sizeClass={`w-1/2  capitalize mx-auto  absolute bottom-0`}
+          sizeClass={`w-[50%]  capitalize mx-auto  absolute bottom-0`}
         />
         <div className="w-full flex items-center justify-center h-full bg-white">
           <section className="w-[100%]">
             <article className="w-[85%] m-auto ">
               <div className="w-[100%] mx-auto py-20 m-auto bg-transparent flex flex-col justify-center">
-                <div className="mb-[4rem]">
+                <div className="mb-[1rem]">
                   <Link to={"/"}>
                     <IoMdArrowRoundBack size={30} />
                   </Link>
@@ -173,7 +173,7 @@ function Agent() {
                           logo={logo}
                           imageSrc={imgo}
                           heading={`Driven by Power,\nDefined by Reliability`}
-                          sizeClass={`w-1/2 px-10 capitalize mx-auto  absolute bottom-0`}
+                          sizeClass={`w-[50%] px-10 capitalize mx-auto  absolute bottom-0`}
                         />
                         <div className="w-full flex items-center  h-full bg-white">
                           <div className="bg-white text-[#2544D8] px-10 py-8 text-center rounded-lg w-full">

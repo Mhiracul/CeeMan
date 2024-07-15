@@ -18,7 +18,7 @@ const BecomeAgent = () => {
             </p>
             <Link
               to="/agent"
-              className="mt-8 text-white text-center bg-[#1B191E] py-2 font-400 text-[1rem]"
+              className="mt-8 w-[13rem] text-white text-center bg-[#1B191E] py-2 font-400 text-[1rem]"
             >
               <button>Become a Distributor </button>
             </Link>

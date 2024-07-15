@@ -14,6 +14,7 @@ function Contact() {
     email: "",
     request: "",
   });
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,8 +38,9 @@ function Contact() {
 
       if (response.ok) {
         // Handle successful submission
+        setSuccess("Your message has been sent successfully!");
+
         console.log("Your message has been sent successfully!");
-        alert("Your message has been sent successfully!");
       } else {
         // Handle errors
         alert("There was an error sending your message. Please try again.");
@@ -68,7 +70,7 @@ function Contact() {
                     <div className="flex gap-3 items-start">
                       <MdMailOutline className=" text-[#2544D8]" size={20} />
                       <a href="mailto:info@ceeman.com" className="text-black">
-                        info@ceeman.com
+                        royalceeman@gmail.com
                       </a>
                     </div>
                     <div className="flex gap-3 items-start">
@@ -156,6 +158,48 @@ function Contact() {
             </section>
           </div>
         </section>
+        {success && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+            <div className="  w-full lg:h-screen bg-white bg-opacity-50  md:h-screen h-full flex lg:flex-row md:flex-row flex-col">
+              <Sidebar
+                logo={logo}
+                imageSrc={imgo}
+                heading={`Driven by Power,\nDefined by Reliability`}
+                sizeClass={`w-[50%] px-10  capitalize mx-auto  absolute bottom-0`}
+              />
+              <div className="w-full flex items-center  h-full bg-white">
+                <div className="bg-white  text-[#2544D8] px-10 py-8 text-center rounded-lg w-full">
+                  <img
+                    src={blueTick}
+                    alt="Blue_Tick_For_Validation"
+                    className="m-auto"
+                  />
+                  <h2 className="text-base font-bold mb-4"> Thank you!</h2>
+                  <p className="mb-4 ">
+                    Your request has been sent. We will get back to you soon!{" "}
+                  </p>
+
+                  <Link to={"/"}>
+                    <button
+                      // onClick={() => setShowPopup(false)}
+                      className="bg-[#000] text-white w-full  py-2 px-9 rounded hover:bg-[#282828]"
+                    >
+                      Continue
+                    </button>
+                  </Link>
+                  <Link to={"/product"}>
+                    <button
+                      // onClick={() => setShowPopup(false)}
+                      className="bg-[#2544D8] text-white w-full  py-2 px-9 rounded hover:bg-blue-600"
+                    >
+                      See Products
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

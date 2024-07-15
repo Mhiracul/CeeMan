@@ -75,9 +75,11 @@ const SignUp = () => {
         });
       } else {
         setError(data.message || "Signup failed");
+        toast.error(data.message || "Signup failed");
       }
     } catch (error) {
       setError("An error occurred");
+      toast.error("An error occurred");
     }
 
     console.log(formData);
@@ -106,7 +108,7 @@ const SignUp = () => {
           logo={logo}
           imageSrc={img}
           heading={`Let's Get Started`}
-          sizeClass={`w-[70%] capitalize mx-auto  absolute bottom-0`}
+          sizeClass={`w-[60%] capitalize mx-auto  absolute bottom-0`}
         />
         <div className="w-full flex items-center justify-center h-full bg-white">
           <div className="bg-white px-10 py-8 rounded-lg w-full">
@@ -155,7 +157,7 @@ const SignUp = () => {
                 <FontAwesomeIcon
                   icon={showPassword ? faEyeSlash : faEye}
                   onClick={togglePasswordVisibility}
-                  className="absolute right-2 top-[70%] transform -translate-y-1/2 cursor-pointer"
+                  className="absolute right-2 top-[60%] transform -translate-y-1/2 cursor-pointer"
                 />
               </div>
               <div className="mb-4 relative">
@@ -172,7 +174,7 @@ const SignUp = () => {
                 <FontAwesomeIcon
                   icon={showConfirmPassword ? faEyeSlash : faEye}
                   onClick={toggleConfirmPasswordVisibility}
-                  className="absolute right-2 top-[70%] transform -translate-y-1/2 cursor-pointer"
+                  className="absolute right-2 top-[60%] transform -translate-y-1/2 cursor-pointer"
                 />
               </div>
               {/* TERMS AND CONDITIONS */}

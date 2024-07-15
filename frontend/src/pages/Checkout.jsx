@@ -40,6 +40,15 @@ const Checkout = ({ item }) => {
   const itemsPerPage = 2;
 
   useEffect(() => {
+    if (!token) {
+      toast.error("Please sign in or sign up to continue to checkout.");
+      history.push("/signin"); // Redirect to login page if not authenticated
+    } else {
+      dispatch(viewCart());
+    }
+  }, [dispatch, token, history]);
+
+  useEffect(() => {
     const fetchStates = async () => {
       try {
         const response = await axios.get(

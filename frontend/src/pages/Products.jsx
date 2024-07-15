@@ -4,8 +4,11 @@ import Footer from "../components/Footer";
 import ProductAdvert from "../components/ProductAdvert";
 import ProductComp from "../components/ProductComp";
 import Breadcrumbs from "../BreadCrumb/BreadCrumbs";
+import UseScrollToTop from "../UseScrollToTop";
 
 const Products = () => {
+  UseScrollToTop();
+
   return (
     <div>
       <Navbar />

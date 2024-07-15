@@ -95,7 +95,7 @@ const SignIn = () => {
           logo={logo}
           imageSrc={img}
           heading={`Welcome Back!`}
-          sizeClass={`w-1/2    capitalize mx-auto  absolute bottom-0`}
+          sizeClass={`w-[50%]    capitalize mx-auto  absolute bottom-0`}
         />
 
         <div className="w-full flex items-center justify-center h-full bg-white">

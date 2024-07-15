@@ -17,7 +17,7 @@ const CustomerAgent = () => {
             </p>
             <Link
               to="/contact"
-              className="mt-8 text-white text-center bg-[#1B191E] py-2 font-400 text-[1rem]"
+              className="mt-8 text-white w-[13rem] text-center bg-[#1B191E] py-2 font-400 text-[1rem]"
             >
               {" "}
               <button>Contact Us</button>

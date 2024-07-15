@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const Products = ({ products = [], loading, viewProducts }) => {
   useEffect(() => {
     viewProducts();
-    window.scrollTo(0, 0); // Scroll to top of the page when component mounts
   }, [viewProducts]);
 
   const formatPrice = (price) => {
@@ -38,36 +37,38 @@ const Products = ({ products = [], loading, viewProducts }) => {
                 const newPrice = originalPrice + 150000;
                 const defaultRating = 3.5;
                 return (
-                  <div
-                    key={product.ProductID}
-                    className="border border-[#efefef] flex flex-col items-center py-3 justify-center"
-                  >
-                    <img
-                      src={product.imageUrl[0]} // Accessing the first image in the array
-                      alt={product.name}
-                      className="w-1/2"
-                    />
-                    <div className="flex flex-col md:items-start items-center py-3">
-                      <h3 className="text-xs font-normal">{product.name}</h3>
-                      <p className="text-base font-bold">
-                        <span>Price: </span>
-                        {formatPrice(product.price)}
-                      </p>
-
-                      <p className="text-xs mt-3 font-normal line-through text-black">
-                        {formatPrice(`₦${Math.round(newPrice)}`)}
-                      </p>
-
-                      <StarRatings
-                        rating={defaultRating}
-                        starRatedColor="#E5B800"
-                        numberOfStars={5}
-                        name="rating"
-                        starDimension="13px"
-                        starSpacing="1px"
+                  <Link to="/product">
+                    <div
+                      key={product.ProductID}
+                      className="border border-[#efefef] flex flex-col items-center py-3 justify-center"
+                    >
+                      <img
+                        src={product.imageUrl[0]} // Accessing the first image in the array
+                        alt={product.name}
+                        className="w-1/2"
                       />
+                      <div className="flex flex-col md:items-start items-center py-3">
+                        <h3 className="text-xs font-normal">{product.name}</h3>
+                        <p className="text-base font-bold">
+                          <span>Price: </span>
+                          {formatPrice(product.price)}
+                        </p>
+
+                        <p className="text-xs mt-3 font-normal line-through text-black">
+                          {formatPrice(`₦${Math.round(newPrice)}`)}
+                        </p>
+
+                        <StarRatings
+                          rating={defaultRating}
+                          starRatedColor="#E5B800"
+                          numberOfStars={5}
+                          name="rating"
+                          starDimension="13px"
+                          starSpacing="1px"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })
             ) : (
